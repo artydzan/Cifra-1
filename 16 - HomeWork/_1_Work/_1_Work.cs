@@ -19,87 +19,87 @@ namespace _1_Work
             // if (условие_1) && (условие_2) то вывести "Целое положительное число.
             // * Все вычесления должны быть выполнены в функцияхd
 
-            bool _flag = false;
             byte _counter = 0;
             Console.Write("Введите число: ");
-            string _line = Console.ReadLine();
+            string _line = Console.ReadLine().Replace(".", ",");
             string _lineResult = "";
 
-            
-
-            _flag = boolNumberSingle();
-            if(_flag == true) { _lineResult = _line + " Число вещественное"; }
-
-            _flag = boolNumberInt();
-            if(_flag == true) { _lineResult = _line + " Число целое"; }
 
 
-            _flag = boolNumberTrue();
-            if (_flag == true) { _lineResult = _lineResult + " положительно"; }
+            _counter = boolNumber();
+            if (_counter == 1)
+            {
+                _lineResult = _line + " - " + "Число целое";
+                _counter = 0;
+            }
+            else if (_counter == 2)
+            {
+                _lineResult = _line + " - " + "Число вещественное";
+                _counter = 0;
+            }
+            else
+            {
+                _lineResult = _line + " - " + "Не удалось определить число";
+            }
 
-            _flag = boolNumberFalse();
-            if (_flag == true) { _lineResult = _lineResult + " отрицательное"; }
 
 
 
-            
+            _counter = boolNumberPositive();
+            if (_counter == 1)
+            {
+                _lineResult = _lineResult + " - " + "положительное";
+                _counter = 0;
+            }
+            else if (_counter == 2)
+            {
+                _lineResult = _lineResult + " - " + "отрицательное";
+                _counter = 0;
+            }
+            else
+            {
+                _lineResult = _lineResult + " - " + "не удалось определить знак числа";
+            }
+
 
             Console.WriteLine(_lineResult);
 
-            
-            
-            bool boolNumberSingle ()
+
+            byte boolNumber()
             {
 
                 float resultSingle;
-
-                bool boolSingle = Single.TryParse(_line, out resultSingle);
-
-                if (boolSingle == true)
-                {
-                    return true;
-                }
-
-                return false;
-            }
-            bool boolNumberInt()
-            {
                 int resultInt;
 
                 bool boolInt = Int32.TryParse(_line, out resultInt);
+                bool boolSingle = Single.TryParse(_line, out resultSingle);
 
                 if (boolInt == true)
                 {
-                    return true;
+                    return 1;
                 }
-
-                return false;
-            }
-            bool boolNumberTrue()
-            {
-
-                if (_flag == true && Convert.ToSingle(_line) >=0)
+                else if (boolSingle == true)
                 {
-                    return true;
+                    return 2;
                 }
-                return false;
+
+                return 0;
             }
-            bool boolNumberFalse()
+            byte boolNumberPositive()
             {
 
-                if (_flag == true && Convert.ToSingle(_line) < 0)
+                if (Convert.ToSingle(_line) >= 0)
                 {
-                    return true;
+                    return 1;
                 }
-                return false;
+                else if (Convert.ToSingle(_line) < 0)
+                {
+                    return 2;
+                }
+                return 0;
             }
 
-            void badExit()
-            {
-                Console.WriteLine("Не удалось определить число! \n\nНажмите любую клавишу для завершения...");
-                Console.ReadKey();
-                Environment.Exit(0);
-            }
+
         }
     }
 }
