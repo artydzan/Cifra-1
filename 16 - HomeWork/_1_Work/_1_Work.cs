@@ -69,12 +69,10 @@ namespace _1_Work
             {
 
                 float resultSingle;
-                int resultInt;
 
-                bool boolInt = Int32.TryParse(_line, out resultInt);
                 bool boolSingle = Single.TryParse(_line, out resultSingle);
 
-                if (boolInt == true)
+                if (boolSingle == true && resultSingle % 1 == 0)
                 {
                     return 1;
                 }
