@@ -39,11 +39,10 @@
                 int resultInt;
                 string[] resultString;
 
-                bool boolInt = Int32.TryParse(line, out resultInt);
                 bool boolSingle = Single.TryParse(line, out resultSingle);
                 resultString = line.Split(separator, StringSplitOptions.RemoveEmptyEntries);
 
-                if (boolInt == true)
+                if (boolSingle == true && resultSingle % 1 == 0)
                 {
                     return line + " - " + "Число целое";
                 }
