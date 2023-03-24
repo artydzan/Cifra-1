@@ -43,10 +43,9 @@
                 float resultSingle;
                 int resultInt;
 
-                bool boolInt = Int32.TryParse(line, out resultInt);
                 bool boolSingle = Single.TryParse(line, out resultSingle);
 
-                if (boolInt == true)
+                if (boolSingle == true && resultSingle % 1 == 0)
                 {
                     return line + " - " + "Число целое";
                 }
